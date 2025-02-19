@@ -1,21 +1,17 @@
 import React, { useState } from 'react'
 
-import leetCode from '@/assets/leetcode.png'
-
-import { Button } from '@/components/ui/button'
 import Show from '@/components/Show'
+import { Button } from '@/components/ui/button'
+import { HideApiKey } from '@/components/ui/input'
 import {
   Select,
   SelectContent,
   SelectGroup,
-  SelectLabel,
   SelectItem,
-  SelectSeparator,
-  SelectValue,
   SelectTrigger,
+  SelectValue,
 } from '@/components/ui/select'
-import { VALID_MODELS, type ValidModel } from './constants/valid_modals'
-import { HideApiKey } from '@/components/ui/input'
+import { VALID_MODELS, type ValidModel } from './constants/valid_models'
 import { useChromeStorage } from './hooks/useChromeStorage'
 
 const Popup: React.FC = () => {
@@ -31,7 +27,7 @@ const Popup: React.FC = () => {
 
   const [selectedModel, setSelectedModel] = useState<ValidModel>()
 
-  const updatestorage = async (e: React.FormEvent<HTMLFormElement>) => {
+  const updateStorage = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
     try {
       setIsloading(true)
@@ -71,7 +67,7 @@ const Popup: React.FC = () => {
     loadChromeStorage()
   }, [])
 
-  const heandelModel = async (v: ValidModel) => {
+  const handleModel = async (v: ValidModel) => {
     if (v) {
       const { setSelectModel, getKeyModel, selectModel } = useChromeStorage()
       setSelectModel(v)
@@ -85,32 +81,24 @@ const Popup: React.FC = () => {
     <div className="relative p-4 w-[350px] bg-background">
       <Show show={isLoaded}>
         <div className="">
-          <div className="w-full  h-20 overflow-hidden ">
-            <img
-              className="mx-auto h-20 w-auto"
-              src={leetCode}
-              width={150}
-              height={150}
-            />
-          </div>
           <div className="text-center">
             <h1 className=" font-bold text-3xl text-white">
-              LeetCode <span className="text-whisperOrange">Whisper</span>
+              Otto <span className="text-whisperOrange">Complete</span>
             </h1>
             <p className="text-sm text-muted-foreground">
-              Your Companion to Beat LeetCode!
+              Your Autocompletion Companion
             </p>
           </div>
           <form
-            onSubmit={(e) => updatestorage(e)}
+            onSubmit={(e) => updateStorage(e)}
             className="mt-10 flex flex-col gap-2 w-full"
           >
             <div className="space-y-2">
               <label htmlFor="text" className="text-xs text-muted-foreground">
-                select a model
+                Select a model
               </label>
               <Select
-                onValueChange={(v: ValidModel) => heandelModel(v)}
+                onValueChange={(v: ValidModel) => handleModel(v)}
                 value={selectedModel}
               >
                 <SelectTrigger className="w-full">
@@ -118,8 +106,6 @@ const Popup: React.FC = () => {
                 </SelectTrigger>
                 <SelectContent>
                   <SelectGroup>
-                    <SelectLabel>Model</SelectLabel>
-                    <SelectSeparator />
                     {VALID_MODELS.map((modelOption) => (
                       <SelectItem
                         key={modelOption.name}
@@ -145,7 +131,7 @@ const Popup: React.FC = () => {
               />
             </div>
             <Button disabled={isloading} type="submit" className="w-full mt-2">
-              save API Key
+              Save API Key
             </Button>
           </form>
           {submitMessage ? (
@@ -172,18 +158,6 @@ const Popup: React.FC = () => {
           ) : (
             ''
           )}
-          <div className="mt-7 flex items-center justify-center">
-            <p className="text-sm">
-              Want more features?&nbsp;
-              <a
-                href="https://github.com/piyushgarg-dev/leetcode-whisper-chrome-extension/issues/new"
-                className="text-blue-500 hover:underline"
-                target="_blank"
-              >
-                Request a feature!
-              </a>
-            </p>
-          </div>
         </div>
       </Show>
     </div>

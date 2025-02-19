@@ -1,8 +1,8 @@
 {
   "manifest_version": 3,
-  "name": "LeetCode Whisper",
-  "version": "1.0.0",
-  "description": "Chrome extension providing AI-driven hints on LeetCode problems. Get step-by-step help to boost problem-solving skills effectively.",
+  "name": "Otto Complete",
+  "version": "0.1.0",
+  "description": "Chrome extension providing AI-driven autocompletion with context",
   "permissions": ["storage"],
   "action": {
     "default_popup": "index.html"

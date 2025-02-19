@@ -1,4 +1,4 @@
-import { ValidModel } from '@/constants/valid_modals'
+import { ValidModel } from '@/constants/valid_models'
 
 export const useChromeStorage = () => {
   return {
