@@ -66,4 +66,8 @@ Given the incomplete text, predict the next 3-5 most likely words or phrases tha
    - Manage truncated or incomplete words
    - Account for special characters and formatting
 
+
+KEY GUIDELINE
+- Only provide one auto completion.
+
 `

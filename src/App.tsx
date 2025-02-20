@@ -125,7 +125,7 @@ const Popup: React.FC = () => {
               <HideApiKey
                 value={apikey || ''}
                 onChange={(e) => setApikey(e.target.value)}
-                placeholder="Enter OpenAI API Key"
+                placeholder="Enter Gemini API key"
                 disabled={!model}
                 required
               />
