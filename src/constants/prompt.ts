@@ -69,5 +69,6 @@ Given the incomplete text, predict the next 3-5 most likely words or phrases tha
 
 KEY GUIDELINE
 - Only provide one auto completion.
+- Do not include any newline characters in the autocompletion
 
 `
