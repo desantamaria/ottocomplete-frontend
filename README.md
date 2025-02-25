@@ -1,50 +1,44 @@
-# React + TypeScript + Vite
+# AutoTab: Chrome Extension for Text Completions
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A Chrome extension that provides AI-powered text completion for any text field on the web. As you type in any input field, text area, or contenteditable element, AutoTab will suggest completions that you can accept by simply pressing the Tab key.
 
-Currently, two official plugins are available:
+## Features
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- Works on any website and in any text input field
+- Provides real-time AI-powered text suggestions as you type
+- Accept suggestions with a simple Tab key press
+- Seamlessly integrates with existing text inputs without disrupting your workflow
+- Supports both standard text inputs and contenteditable elements
+- Intelligent debouncing to minimize API calls and improve performance
 
-## Expanding the ESLint configuration
+## Installation
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+1. Clone this repository or download the source code
+2. Run `npm install` to install all dependencies
+3. Run `npm run build` to create the distribution files (creates a new "dist" folder)
+4. Open Chrome and navigate to `chrome://extensions/`
+5. Enable "Developer mode" using the toggle in the top right corner
+6. Click "Load unpacked" and select the "dist" folder from this project
+7. The extension icon should appear in your browser toolbar - click and pin it for easy access
 
-- Configure the top-level `parserOptions` property like this:
+## Usage
 
-```js
-export default tseslint.config({
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
-```
+1. Navigate to any website with text input fields
+2. Start typing in any text field
+3. As you type, AI suggestions will appear in light gray
+4. Press the Tab key to accept a suggestion
+5. Continue typing and accepting suggestions as needed
 
-- Replace `tseslint.configs.recommended` to `tseslint.configs.recommendedTypeChecked` or `tseslint.configs.strictTypeChecked`
-- Optionally add `...tseslint.configs.stylisticTypeChecked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and update the config:
+## How It Works
 
-```js
-// eslint.config.js
-import react from 'eslint-plugin-react'
+The extension uses a content script that injects into web pages and attaches event listeners to track user input. When you type, the extension sends your text to a local API server that returns AI-generated completions. These completions are displayed as an overlay that perfectly matches the styling of the input field you're typing in.
 
-export default tseslint.config({
-  // Set the react version
-  settings: { react: { version: '18.3' } },
-  plugins: {
-    // Add the react plugin
-    react,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended rules
-    ...react.configs.recommended.rules,
-    ...react.configs['jsx-runtime'].rules,
-  },
-})
-```
+## Development
+
+- `npm install` - Install dependencies
+- `npm run build` - Build the extension for production
+- `npm run format` - Format code using Prettier
+
+## Customization
+
+The extension's appearance and behavior can be customized by modifying the appropriate CSS and JavaScript files.
