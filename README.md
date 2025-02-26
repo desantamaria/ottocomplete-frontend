@@ -1,6 +1,6 @@
-# AutoTab: Chrome Extension for Text Completions
+# OttoComplete: Chrome Extension for Text Completions
 
-A Chrome extension that provides AI-powered text completion for any text field on the web. As you type in any input field, text area, or contenteditable element, AutoTab will suggest completions that you can accept by simply pressing the Tab key.
+A Chrome extension that provides AI-powered text completion for any text field on the web. As you type in any input field, text area, or contenteditable element, OttoComplete will suggest completions that you can accept by simply pressing the Tab key.
 
 ## Features
 

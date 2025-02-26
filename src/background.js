@@ -1,6 +1,6 @@
 // Listen for installation
 chrome.runtime.onInstalled.addListener(() => {
-  console.log("AI Text Completion extension installed");
+  console.log("OttoComplete extension installed");
 });
 
 // Listen for messages from content script
