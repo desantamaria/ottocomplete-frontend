@@ -7,12 +7,12 @@ const debounce = (func, wait) => {
 };
 
 const getCompletion = async message => {
-  const response = await fetch("http//localhost:3000/api/chat", {
+  const response = await fetch("http://localhost:3000/api/chat", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
     },
-    body: JSON.stringify({ message }),
+    body: JSON.stringify({ message: message, context: {} }),
   });
 
   if (!response) {
@@ -110,6 +110,7 @@ class AICompletion {
     }
 
     try {
+      console.log("Fetching response for ", text);
       const suggestion = await getCompletion(text);
       this.suggestion = suggestion.trim();
       if (this.currentElement && this.suggestion) {
