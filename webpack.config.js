@@ -43,4 +43,7 @@ module.exports = {
     path: path.join(__dirname, "dist"),
     filename: "[name].js",
   },
+  resolve: {
+    extensions: [".js", ".jsx"],
+  },
 };
