@@ -68,8 +68,18 @@ class SuggestionOverlay {
     const textWidth = measureSpan.getBoundingClientRect().width;
     document.body.removeChild(measureSpan);
 
-    this.overlay.style.top = `${rect.top + window.scrollY}px`;
-    this.overlay.style.left = `${rect.left + window.scrollX + textWidth}px`;
+    const { x, y } = this.getCursorCoordinates(element);
+
+    // Determine if the cursor is at the end of the textarea
+    const isCursorAtEnd = x >= rect.right;
+
+    if (isCursorAtEnd) {
+      console.log("CURSOR AT END");
+    }
+
+    console.log(`Cursor Position X: ${x} Y: ${y}`);
+    this.overlay.style.top = `${rect.top + window.scrollY + (isCursorAtEnd ? computedStyle.lineHeight : 0)}px`;
+    this.overlay.style.left = `${rect.left + window.scrollX + (isCursorAtEnd ? 0 : textWidth)}px`;
     this.overlay.style.height = computedStyle.lineHeight;
     this.overlay.style.padding = computedStyle.padding;
     this.overlay.style.fontSize = computedStyle.fontSize;
@@ -80,6 +90,34 @@ class SuggestionOverlay {
     // Only show the suggestion
     this.overlay.textContent = suggestion;
     this.overlay.style.display = "block";
+  }
+
+  getCursorCoordinates(textarea) {
+    const cursorPosition = textarea.selectionStart;
+    const boundingRect = textarea.getBoundingClientRect();
+
+    // Get the text before the cursor
+    const textBeforeCursor = textarea.value.substring(0, cursorPosition);
+
+    // Create a temporary element to measure the width of the text
+    const tempSpan = document.createElement("span");
+    tempSpan.style.visibility = "hidden";
+    tempSpan.style.whiteSpace = "pre";
+    tempSpan.innerText = textBeforeCursor;
+
+    // Append the span to the body to get its dimensions
+    document.body.appendChild(tempSpan);
+    const textWidth = tempSpan.offsetWidth;
+    document.body.removeChild(tempSpan);
+
+    // Calculate the cursor's X position relative to the textarea
+    const cursorX = boundingRect.left + textWidth;
+
+    // Return the position relative to the textarea's bounding box
+    return {
+      x: cursorX,
+      y: boundingRect.top,
+    };
   }
 
   hide() {
@@ -110,7 +148,6 @@ class AICompletion {
     }
 
     try {
-      console.log("Fetching response for ", text);
       const suggestion = await getCompletion(text);
       this.suggestion = suggestion.trim();
       if (this.currentElement && this.suggestion) {
